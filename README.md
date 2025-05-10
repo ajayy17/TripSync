@@ -1,0 +1,1 @@
+TripSync is an all-in-one travel and booking platform designed to simplify the way you plan, book, and manage your trips. Whether you're organizing a solo getaway, a family vacation, or a business trip, TripSync brings everything together—flights, hotels, activities, and itineraries—into a single, intuitive interface.
