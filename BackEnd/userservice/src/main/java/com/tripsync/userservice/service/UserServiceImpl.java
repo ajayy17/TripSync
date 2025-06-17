@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
     }
 
     public UserDTO getUserByEmail(String email) {
-        User user = userRepository.findByUserEmail(email);
+        User user = userRepository.findByEmail(email);
         if(user == null){
             throw new ResourceNotFoundException("User", "userName", email);
         }
@@ -76,11 +76,11 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    public LoginDTO loginUser(LoginDTO loginDTO)
-    {
-        UserDTO userDTO= getUserByEmail(loginDTO.getEmail());
-
-
-        return null;
-    }
+//    public LoginDTO loginUser(LoginDTO loginDTO)
+//    {
+//        UserDTO userDTO= getUserByEmail(loginDTO.getEmail());
+//
+//
+//        return null;
+//    }
 }

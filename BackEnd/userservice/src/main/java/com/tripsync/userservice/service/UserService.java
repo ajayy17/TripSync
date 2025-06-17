@@ -12,5 +12,5 @@ public interface UserService {
     UserDTO updateUser(String name, UserDTO userDTO);
     UserDTO getUserByName(String name);
 //    UserDTO getUserByEmail(LoginDTO loginDTO);
-    LoginDTO loginUser(LoginDTO loginDTO);
+    //LoginDTO loginUser(LoginDTO loginDTO);
 }
