@@ -1,5 +1,6 @@
 package com.tripsync.userservice.service;
 
+import com.tripsync.userservice.payload.LoginDTO;
 import com.tripsync.userservice.payload.UserDTO;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface UserService {
     UserDTO deleteUser(String name);
     UserDTO updateUser(String name, UserDTO userDTO);
     UserDTO getUserByName(String name);
+//    UserDTO getUserByEmail(LoginDTO loginDTO);
+    LoginDTO loginUser(LoginDTO loginDTO);
 }

@@ -1,5 +1,6 @@
 package com.tripsync.userservice.controller;
 
+import com.tripsync.userservice.payload.LoginDTO;
 import com.tripsync.userservice.payload.UserDTO;
 import com.tripsync.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,13 @@ public class UserController {
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO){
         userService.addUser(userDTO);
         return new ResponseEntity<>(userDTO,HttpStatus.CREATED);
+    }
+
+    @PostMapping("user/loginUser")
+    public ResponseEntity<LoginDTO> loginUser(@RequestBody LoginDTO loginDTO){
+
+        userService.loginUser(loginDTO);
+        return new ResponseEntity<>(loginDTO,HttpStatus.OK);
     }
 
     @GetMapping("admin/getAllUsers")

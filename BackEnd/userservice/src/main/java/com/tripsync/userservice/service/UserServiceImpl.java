@@ -2,6 +2,7 @@ package com.tripsync.userservice.service;
 
 import com.tripsync.userservice.exceptions.ResourceNotFoundException;
 import com.tripsync.userservice.model.User;
+import com.tripsync.userservice.payload.LoginDTO;
 import com.tripsync.userservice.payload.UserDTO;
 import com.tripsync.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -64,5 +65,22 @@ public class UserServiceImpl implements UserService{
             throw new ResourceNotFoundException("User", "userName", name);
         }
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    public UserDTO getUserByEmail(String email) {
+        User user = userRepository.findByUserEmail(email);
+        if(user == null){
+            throw new ResourceNotFoundException("User", "userName", email);
+        }
+        return modelMapper.map(user, UserDTO.class);
+    }
+
+
+    public LoginDTO loginUser(LoginDTO loginDTO)
+    {
+        UserDTO userDTO= getUserByEmail(loginDTO.getEmail());
+
+
+        return null;
     }
 }
