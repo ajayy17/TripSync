@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -11,15 +13,26 @@ const Login = () => {
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+  const updateName = (e) => {
+    setName(e.target.value);
+  };
 
-  const SignIn = () => {
+  const SignUp = () => {
     //Call the api and pass the data
   };
+
   return (
     <>
       <div>
         <div>
-          <h1>Login</h1>
+          <h1>Register</h1>
+          <div>
+            <h3>Enter your Name</h3>
+            <input type="text" onChange={updateName} />
+          </div>
+        </div>
+        <div>
+          <h1>Email</h1>
           <div>
             <h3>Enter your Email</h3>
             <input type="text" onChange={updateEmail} />
@@ -33,11 +46,13 @@ const Login = () => {
           </div>
         </div>
         <div>
-          <button onClick={SignIn}>SingIn</button>
+          <button onClick={SignUp}>SingUp</button>
         </div>
       </div>
     </>
   );
 };
 
-export default Login;
+export default Register;
+
+// name email password
