@@ -25,34 +25,36 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private String role;
 
-    public UserDetailsImpl(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String email, String password, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.authorities = authorities;
+        this.role = role;
     }
 
     public static UserDetailsImpl build(User user){
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
-                .collect(Collectors.toList());
+//        List<GrantedAuthority> authorities = user.getRoles().stream()
+//                .map(role -> new SimpleGrantedAuthority(role.get))
+//                .collect(Collectors.toList());
 
         return new UserDetailsImpl(
                 user.getUserId(),
                 user.getUserName(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                user.getRole()
         );
     }
 
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        return authorities;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
+
     @Override
     public String getPassword(){
         return password;

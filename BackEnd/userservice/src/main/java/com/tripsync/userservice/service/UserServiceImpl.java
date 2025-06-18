@@ -7,6 +7,7 @@ import com.tripsync.userservice.payload.UserDTO;
 import com.tripsync.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +21,14 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void addUser(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+        user.setPassword(encodedPassword);
         userRepository.save(user);
     }
 

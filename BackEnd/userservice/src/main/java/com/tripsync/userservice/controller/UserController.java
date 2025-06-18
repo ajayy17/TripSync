@@ -95,15 +95,13 @@ public class UserController {
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+        String roles = userDetails.getRole();
 
-        UserInfoResponse response = new UserInfoResponse(userDetails.getId(),userDetails.getUsername(), roles);
+        UserInfoResponse response = new UserInfoResponse(userDetails.getId(),userDetails.getUsername(), roles, jwtCookie.getValue());
 
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,
-                        jwtCookie.toString())
+                        jwtCookie.getValue())
                 .body(response);
     }
 

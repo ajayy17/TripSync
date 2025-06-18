@@ -1,9 +1,7 @@
 package com.tripsync.userservice.security;
 
 import com.tripsync.userservice.model.AppRole;
-import com.tripsync.userservice.model.Role;
 import com.tripsync.userservice.model.User;
-import com.tripsync.userservice.repository.RoleRepository;
 import com.tripsync.userservice.repository.UserRepository;
 import com.tripsync.userservice.security.jwt.AuthEntryPointJwt;
 import com.tripsync.userservice.security.jwt.AuthTokenFilter;
@@ -78,7 +76,7 @@ public class SecurityConfig {
                                 .requestMatchers("/images/**").permitAll()
                                 .requestMatchers("/images/**").permitAll()
                                 .requestMatchers("/tripSync/api/user/registerUser").permitAll()
-                                .requestMatchers("/tripSync/api/signin").permitAll()
+                                .requestMatchers("/tripSync/api/*").permitAll()
                                 .anyRequest().authenticated()
                 );
 
@@ -104,25 +102,25 @@ public class SecurityConfig {
         ));
     }
 
-    @Bean
-    public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        return args -> {
-            // Retrieve or create roles
-            Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
-                    .orElseGet(() -> {
-                        Role newUserRole = new Role(AppRole.ROLE_USER);
-                        return roleRepository.save(newUserRole);
-                    });
-
-            Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
-                    .orElseGet(() -> {
-                        Role newAdminRole = new Role(AppRole.ROLE_ADMIN);
-                        return roleRepository.save(newAdminRole);
-                    });
-
-            Set<Role> userRoles = Set.of(userRole);
-            Set<Role> adminRoles = Set.of(userRole, adminRole);
-        };
-    }
+//    @Bean
+//    public CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+//        return args -> {
+//            // Retrieve or create roles
+//            Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
+//                    .orElseGet(() -> {
+//                        Role newUserRole = new Role(AppRole.ROLE_USER);
+//                        return roleRepository.save(newUserRole);
+//                    });
+//
+//            Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
+//                    .orElseGet(() -> {
+//                        Role newAdminRole = new Role(AppRole.ROLE_ADMIN);
+//                        return roleRepository.save(newAdminRole);
+//                    });
+//
+//            Set<Role> userRoles = Set.of(userRole);
+//            Set<Role> adminRoles = Set.of(userRole, adminRole);
+//        };
+  //  }
 
 }

@@ -19,8 +19,6 @@ import java.util.Set;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email")
         })
-@Setter
-@Getter
 public class User {
 
     @Id
@@ -42,19 +40,15 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Setter
-    @Getter
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @NotBlank
+    @Column(name = "role")
+    private String role;
 
-    public User(String userName, String email, String password) {
+    public User(String userName, String email, String password, String role) {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
 }
