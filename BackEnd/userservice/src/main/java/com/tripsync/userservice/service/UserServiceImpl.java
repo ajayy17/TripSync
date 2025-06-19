@@ -1,6 +1,7 @@
 package com.tripsync.userservice.service;
 
 import com.tripsync.userservice.exceptions.ResourceNotFoundException;
+import com.tripsync.userservice.model.AppRole;
 import com.tripsync.userservice.model.User;
 import com.tripsync.userservice.payload.LoginDTO;
 import com.tripsync.userservice.payload.UserDTO;
@@ -29,6 +30,11 @@ public class UserServiceImpl implements UserService{
         User user = modelMapper.map(userDTO, User.class);
         String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(encodedPassword);
+        try {
+            AppRole.valueOf(userDTO.getRole());
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalArgumentException("Invalid role: must be ROLE_USER or ROLE_ADMIN");
+        }
         userRepository.save(user);
     }
 
@@ -65,14 +71,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO getUserByName(String name) {
-        User user = userRepository.findByUserName(name);
-        if(user == null){
-            throw new ResourceNotFoundException("User", "userName", name);
-        }
-        return modelMapper.map(user, UserDTO.class);
-    }
-
     public UserDTO getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if(user == null){
@@ -80,13 +78,4 @@ public class UserServiceImpl implements UserService{
         }
         return modelMapper.map(user, UserDTO.class);
     }
-
-
-//    public LoginDTO loginUser(LoginDTO loginDTO)
-//    {
-//        UserDTO userDTO= getUserByEmail(loginDTO.getEmail());
-//
-//
-//        return null;
-//    }
 }

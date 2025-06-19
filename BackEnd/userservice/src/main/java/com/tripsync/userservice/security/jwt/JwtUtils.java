@@ -1,21 +1,14 @@
 package com.tripsync.userservice.security.jwt;
 
 import com.tripsync.userservice.security.services.UserDetailsImpl;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseCookie;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.WebUtils;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
@@ -31,55 +24,54 @@ public class JwtUtils {
     @Value("${spring.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    @Value("${spring.userservice.app.jwtCookieName}")
-    private String jwtCookie;
+    private Key key;
 
-    //Getting the token from cookie
-    public String getJwtFromCookies(HttpServletRequest request){
-        Cookie cookie = WebUtils.getCookie(request, jwtCookie);
-        if(cookie != null){
-            return cookie.getValue();
-        }else {
-            return null;
-        }
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal){
-        String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60)
-                .httpOnly(false)
-                .build();
-        return cookie;
+    // Generate token from UserDetails
+    public String generateJwtToken(UserDetailsImpl userPrincipal) {
+        return generateTokenFromUsername(userPrincipal.getEmail(), userPrincipal.getRole());
     }
 
-    public ResponseCookie getCleanJwtCookie(){
-        ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
-        return cookie;
-    }
-
-    public String generateTokenFromUsername(String username) {
+    // Generate token from username
+    public String generateTokenFromUsername(String username, String role) {
         return Jwts.builder()
                 .subject(username)
+                .claim("roles", role)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key())
+                .signWith(key)
                 .compact();
     }
 
+    // Extract username from token
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parser()
-                .verifyWith((SecretKey) key())
-                .build().parseSignedClaims(token)
-                .getPayload().getSubject();
+                .verifyWith((SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
     }
 
-    private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+    public String getRoleFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith((SecretKey) key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.get("roles", String.class);
     }
 
+
+    // Validate token
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parser().verifyWith((SecretKey) key()).build().parseSignedClaims(authToken);
+            Jwts.parser().verifyWith((SecretKey) key).build().parseSignedClaims(authToken);
             return true;
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
