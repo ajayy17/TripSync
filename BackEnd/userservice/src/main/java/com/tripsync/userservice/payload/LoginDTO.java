@@ -1,18 +1,16 @@
 package com.tripsync.userservice.payload;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-    private Long userId;
-    private String userName;
-    private String email;
+public class LoginDTO {
+    @NotBlank
+    private String username;
+    @NotBlank
     private String password;
-    private String role;
 }
