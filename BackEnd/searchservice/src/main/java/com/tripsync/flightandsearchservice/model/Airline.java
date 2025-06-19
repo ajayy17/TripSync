@@ -47,7 +47,7 @@ public class Airline {
     @Column(name="BookedSeats")
     private int bookedSeats;
 
-    @OneToMany(mappedBy = "Airline", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flight> flights = new ArrayList<>();
 
 }

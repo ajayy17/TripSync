@@ -32,7 +32,7 @@ public class City {
     private String CityName;
 
     // One user has many posts
-    @OneToMany(mappedBy = "City", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Airport> airports = new ArrayList<>();
 
 
