@@ -26,6 +26,7 @@ import java.util.Map;
 @RestController
 @EnableMethodSecurity
 @RequestMapping("tripSync/api/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
     private JwtUtils jwtUtils;

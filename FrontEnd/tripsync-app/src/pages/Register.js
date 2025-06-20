@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("ROLE_USER");
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -17,36 +22,77 @@ const Register = () => {
     setName(e.target.value);
   };
 
-  const SignUp = () => {
-    //Call the api and pass the data
+  const SignUp = async () => {
+    try {
+      const response = await fetch("http://localhost:9090/tripSync/api/registerUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: name,
+          email: email,
+          password: password,
+          role: role,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
+      setMessage("User registered successfully!");
+    } catch (error) {
+      setMessage(error.message);
+    }
+    console.log(message)
+  };
+
+  const LogIn = () => {
+    navigate("/login");
   };
 
   return (
     <>
-      <div>
+      <div className="loginHeader">
         <div>
           <h1>Register</h1>
           <div>
-            <h3>Enter your Name</h3>
-            <input type="text" onChange={updateName} />
+            <input
+              type="text"
+              placeholder="name"
+              value={name}
+              onChange={updateName}
+            />
           </div>
         </div>
         <div>
-          <h1>Email</h1>
           <div>
-            <h3>Enter your Email</h3>
-            <input type="text" onChange={updateEmail} />
+            <input
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={updateEmail}
+            />
           </div>
         </div>
         <div>
-          <h1>Password</h1>
           <div>
-            <h3>Enter your password</h3>
-            <input type="text" onChange={updatePassword} />
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={updatePassword}
+            />
           </div>
         </div>
         <div>
           <button onClick={SignUp}>SingUp</button>
+        </div>
+        <div>
+          <button onClick={LogIn}>LogIn</button>
         </div>
       </div>
     </>
@@ -54,5 +100,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// name email password
