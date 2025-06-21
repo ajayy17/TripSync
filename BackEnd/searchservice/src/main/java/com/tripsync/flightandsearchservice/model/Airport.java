@@ -4,26 +4,26 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-
-@Entity
 @Data
+@Entity
+@ToString(exclude = "city")
 @NoArgsConstructor
 @Table(name = "airport",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "AirportId"),
+                @UniqueConstraint(columnNames = "airportId"),
         })
 
 public class Airport {
 
     @NotBlank
-    @Column(name="AirportId")
+    @Column(name="airportId")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int airportId;
+    private String airportId;
 
     @NotBlank
-    @Column(name="AirportName")
+    @Column(name="airportName")
     private String airportName;
 
     @ManyToOne

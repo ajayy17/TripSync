@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
+@ToString(exclude = "airports")
 @NoArgsConstructor
 @Table(name = "city",
         uniqueConstraints = {
@@ -24,12 +26,11 @@ public class City {
 @NotBlank
 @Column(name="cityId")
 @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int CityId;
+    private String cityId;
 
     @NotBlank
     @Column(name="cityName")
-    private String CityName;
+    private String cityName;
 
     // One user has many posts
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)

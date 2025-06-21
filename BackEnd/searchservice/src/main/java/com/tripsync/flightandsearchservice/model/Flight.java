@@ -10,32 +10,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "flight",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "PNR"),
+                @UniqueConstraint(columnNames = "id"),
         })
 
 public class Flight {
-    @NotBlank
-    @Column(name="flightPNR")
+
+
+    @Column(name="id")
     @Id
-    private int FlightPNR;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
     @Column(name="departureId")
-    private int departureId;                    //id of airport
+    private String departureId;                    //id of airport
 
     @NotBlank
-    @Column(name="ArrivalId")
+    @Column(name="arrivalId")
     private String arrivalId;            //id of airport
 
-    @NotBlank
-    @Column(name="TotalPrice")
-    private int totalPrice;
 
-    @NotBlank
-    @Column(name="TotalSeats")
-    private int totalSeats;
+    @Column(name="totalPrice")
+    private Integer totalPrice;
+
+
+    @Column(name="totalSeats")
+    private Integer totalSeats;
 
     @ManyToOne
-    @JoinColumn(name = "AirlinePNR") // This column will exist in the Airline table
+    @JoinColumn(name = "airlinePNR") // This column will exist in the Airline table
     private Airline airline;
 }

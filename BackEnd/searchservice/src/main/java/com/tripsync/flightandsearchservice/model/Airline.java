@@ -13,39 +13,39 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "airline",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "PNR"),
+                @UniqueConstraint(columnNames = "airlinePNR"),
         })
 
 public class Airline {
     @NotBlank
-    @Column(name="PNR")
+    @Column(name="airlinePNR")
     @Id
-    private int PNR;
+    private String airlinePNR;
 
     @NotBlank
-    @Column(name="AirlineName")
+    @Column(name="airlineName")
     private String airlineName;
 
     @NotBlank
     @Column(name="fromCity")
-    private String from;
+    private String fromCity;
 
 
     @NotBlank
     @Column(name="toCity")
-    private int to;
+    private String toCity;
 
     @NotBlank
-    @Column(name="Capacity")
-    private int capacity;
+    @Column(name="capacity")
+    private Integer capacity;
 
     @NotBlank
-    @Column(name="AvailableSeats")
-    private int availableSeats;
+    @Column(name="availableSeats")
+    private Integer availableSeats;
 
     @NotBlank
-    @Column(name="BookedSeats")
-    private int bookedSeats;
+    @Column(name="bookedSeats")
+    private Integer bookedSeats;
 
     @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Flight> flights = new ArrayList<>();
