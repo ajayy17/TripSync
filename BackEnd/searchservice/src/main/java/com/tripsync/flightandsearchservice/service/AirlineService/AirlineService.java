@@ -1,9 +1,6 @@
 package com.tripsync.flightandsearchservice.service.AirlineService;
 
 import com.tripsync.flightandsearchservice.payload.AirlineDTO;
-import com.tripsync.flightandsearchservice.payload.AirportDTO;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
