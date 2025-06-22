@@ -9,6 +9,11 @@ const FlightSearch = () => {
   const [selectedOption, setSelectedOption] = useState("oneWay");
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
+  const [fromCityAirport, setFromCityAirport]=useState();
+  const [toCityAirport, setToCityAirport]=useState();
+  const [totalPassengers, setTotalPassengers]=useState(0);
+  
+  const searchDetails={departureDate:departureDate,returnDate:returnDate,fromCityAirport:fromCityAirport,toCityAirport:toCityAirport,totalPassengers:totalPassengers};
   const navigate = useNavigate();
   
 
@@ -23,9 +28,8 @@ const FlightSearch = () => {
 
   const searchFlights = () => {
       console.log("/Flights")
-      navigate("/Flights")
+      navigate("/flights",{state:{searchDetails}});
   }
-
   return (
   <div>
     <div className="orange-banner"></div>
@@ -58,11 +62,11 @@ const FlightSearch = () => {
       <div className="flight-input-grid">
         <div className="input-box">
           <span>From</span>
-          <input type="text" placeholder="Enter city or airport" />
+          <input type="text" placeholder="Enter city or airport" onChange={()=>{setFromCityAirport(e.target.value)}} />
         </div>
         <div className="input-box">
           <span>To</span>
-          <input type="text" placeholder="Enter city or airport" />
+          <input type="text" placeholder="Enter city or airport" onChange={()=>{setToCityAirport(e.target.value)}}/>
         </div>
         <div className="input-box">
           <span>Departure</span>
@@ -92,7 +96,7 @@ const FlightSearch = () => {
         </div>
         <div className="input-box">
           <span>Travellers & Class</span>
-          <input type="text" placeholder="1 Adult, Economy" />
+          <input type="text" placeholder="1 Adult, Economy" onChange={()=>{setTotalPassengers(e.target.value)}}/>
         </div>
       </div>
 
