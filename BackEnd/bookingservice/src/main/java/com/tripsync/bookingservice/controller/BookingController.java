@@ -33,7 +33,7 @@ bookingService.createBooking(bookingDTO);
     @PutMapping("booking/updateBooking/{PNR}")
     public ResponseEntity<BookingDTO> updateBooking(@PathVariable String PNR,@RequestBody BookingDTO bookingDTO){
 BookingDTO booking=bookingService.updateBooking(PNR,bookingDTO);
-        return new ResponseEntity<>(bookingDTO, HttpStatus.OK);
+        return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
     @DeleteMapping("booking/deleteBooking/{PNR}")

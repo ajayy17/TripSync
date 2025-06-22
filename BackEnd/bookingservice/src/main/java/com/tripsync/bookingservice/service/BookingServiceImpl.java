@@ -22,6 +22,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void createBooking(BookingDTO bookingDTO) {
         Booking booking = modelMapper.map(bookingDTO, Booking.class);
+//        booking.setPNR(bookingDTO.getPNR());
         bookingRepository.save(booking);
     }
 
@@ -49,26 +50,29 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.getBookingByPNR(PNR);
 
         if (booking.getPNR() != null) {
-            if (booking.getBookedSeats() != null) {
+            if (bookingDTO.getBookedSeats() != null) {
                 booking.setBookedSeats(bookingDTO.getBookedSeats());
             }
 
-            if (booking.getEmail() != null) {
+            if (bookingDTO.getEmail() != null) {
                 booking.setEmail(bookingDTO.getEmail());
             }
-            if (booking.getFirstName() != null) {
+            if (bookingDTO.getFirstName() != null) {
                 booking.setFirstName(bookingDTO.getFirstName());
             }
-            if (booking.getLastName() != null) {
+            if (bookingDTO.getLastName() != null) {
+                System.out.println(booking.getPNR());
                 booking.setLastName(bookingDTO.getLastName());
             }
 
-            if (booking.getTotalPrice() != null) {
+            if (bookingDTO.getTotalPrice() != null) {
                 booking.setBookedSeats(bookingDTO.getTotalPrice());
             }
 
 
         }
+
+bookingRepository.save(booking);
         return modelMapper.map(booking, BookingDTO.class);
     }
 

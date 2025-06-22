@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking,String> {
+public interface BookingRepository extends JpaRepository<Booking,Long> {
 
     Booking getBookingByPNR(String PNR);
 

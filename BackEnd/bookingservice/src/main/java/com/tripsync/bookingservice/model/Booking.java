@@ -17,7 +17,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name="booking",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "PNR"),
+                @UniqueConstraint(columnNames = "id"),
+
         @UniqueConstraint(columnNames = "email")
 })
 
@@ -25,6 +26,15 @@ import java.util.Date;
 @Getter
 public class Booking {
 
+
+    @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @NotBlank
+    @Column(name = "PNR")
+    private String PNR;
 
 
     @NotBlank
@@ -65,10 +75,7 @@ public class Booking {
     @Column(name = "toCity")
     private String toCity;
 
-    @NotBlank
-    @Id
-    @Column(name = "PNR")
-    private String PNR;
+
 
     @NotBlank
     @Column(name = "totalPrice")
