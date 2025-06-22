@@ -1,0 +1,114 @@
+/* Main navbar layout */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 10%; /* 10% left/right padding */
+  background-color: #fff;
+  flex-wrap: wrap; /* for responsiveness */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* tripsync logo */
+.logo {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.trip {
+  color: rgb(255, 109, 56);
+}
+
+.sync {
+  color: rgb(34, 116, 224);
+}
+
+/* nav buttons layout */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* all buttons (Flights, Hotels, Login/Register) */
+.nav-buttons button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  color: grey;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Responsive stack under 600px */
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .nav-buttons button {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.nav-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Colored according to logo */
+.flight-icon {
+  color: rgb(255, 109, 56);
+}
+
+.hotel-icon {
+  color: rgb(34, 116, 224);
+}
+
+.login-box {
+  border: 1px solid #1e90ff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.login-box button {
+  background: none;
+  border: none;
+  font-weight: normal;
+  font-size: 1rem;
+  color: rgb(34, 116, 224);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;              /* Avoid extra space */
+}
+
+.login-icon {
+  font-size: 1.2rem;
+  display: inline-flex;    /* Helps in flex alignment */
+  align-items: center;
+}
+
+
+.login-text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-end {
+  display: flex;
+  align-items: center;
+}

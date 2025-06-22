@@ -1,0 +1,76 @@
+.home-container {
+  padding: 0;
+  background-color: #f7f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orange-banner {
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(135deg, #f3701a, #ff9c00);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
+}
+
+.welcome-section {
+  margin-top: -60px;
+  max-width: 1000px;
+  width: 90%;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.welcome-text {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.welcome-text h2 {
+  font-size: 2rem;
+  color: #1e2b3c;
+  margin-bottom: 20px;
+}
+
+.welcome-text p {
+  color: #4b5563;
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+.login-btn {
+  background-color: rgb(255, 109, 56);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: rgb(255, 109, 56);
+}
+
+.welcome-image {
+  flex: 1;
+  background: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}

@@ -42,6 +42,9 @@ const Login = () => {
 
       localStorage.setItem("token", data.jwtToken);
       setMessage("Successfully Logged In");
+
+      //navigating to home page
+      navigate("/");
     } catch (error) {
       setMessage(error.message);
     }
@@ -52,33 +55,37 @@ const Login = () => {
   };
   return (
     <>
-      <div className="loginHeader">
-        <div>
+      <div className="loginContainer">
+        <div className="loginForm">
           <h1>Login</h1>
-          <div>
+          <div className="form-group">
             <input
               type="text"
-              placeholder="email"
+              placeholder="Email"
               value={email}
               onChange={updateEmail}
             />
           </div>
-        </div>
-        <div>
-          <div>
+          <div className="form-group">
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               value={password}
               onChange={updatePassword}
             />
           </div>
-        </div>
-        <div>
-          <button onClick={LogIn}>Login</button>
-        </div>
-        <div>
-          <button onClick={SignUp}>SignUp</button>
+          <div className="form-group">
+            <button
+              onClick={LogIn}
+              disabled={!email || !password} // disables until filled
+              className={email && password ? "active-btn" : "inactive-btn"}
+            >
+              LOGIN
+            </button>
+          </div>
+          <div className="form-group">
+            <button className="sign-btn" onClick={SignUp}>SIGNUP</button>
+          </div>
         </div>
       </div>
     </>
