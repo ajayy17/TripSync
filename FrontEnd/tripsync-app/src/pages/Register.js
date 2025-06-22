@@ -44,10 +44,11 @@ const Register = () => {
       }
 
       setMessage("User registered successfully!");
+      //navigating to home page
+      navigate("/")
     } catch (error) {
       setMessage(error.message);
     }
-    console.log(message)
   };
 
   const LogIn = () => {
@@ -56,43 +57,45 @@ const Register = () => {
 
   return (
     <>
-      <div className="loginHeader">
-        <div>
+      <div className="loginContainer">
+        <div className="loginForm">
           <h1>Register</h1>
-          <div>
+          <div className="form-group">
             <input
               type="text"
-              placeholder="name"
+              placeholder="Name"
               value={name}
               onChange={updateName}
             />
           </div>
-        </div>
-        <div>
-          <div>
+          <div className="form-group">
             <input
               type="text"
-              placeholder="email"
+              placeholder="Email"
               value={email}
               onChange={updateEmail}
             />
           </div>
-        </div>
-        <div>
-          <div>
+          <div className="form-group"> 
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               value={password}
               onChange={updatePassword}
             />
           </div>
+        <div className="form-group">
+           <button
+              onClick={SignUp}
+              disabled={!name || !email || !password} // disables until filled
+              className={name && email && password ? "active-btn" : "inactive-btn"}
+            >
+              SIGNUP
+            </button>
         </div>
-        <div>
-          <button onClick={SignUp}>SingUp</button>
+        <div className="form-group">
+          <button className="sign-btn" onClick={LogIn}>LOGIN</button>
         </div>
-        <div>
-          <button onClick={LogIn}>LogIn</button>
         </div>
       </div>
     </>

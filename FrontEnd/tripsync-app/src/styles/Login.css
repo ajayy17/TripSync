@@ -1,3 +1,102 @@
-.loginHeader{
-    text-align: center;
+.loginContainer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 1rem;
+}
+
+.loginForm{
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.inactive-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: grey;  /* Grey background */
+  color: white;            /* White text */
+  border: 1px solid #aaa;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: not-allowed;     /* Disabled cursor */
+  font-weight: bold;
+}
+
+
+.active-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgb(255, 109, 56);
+  color: white;       /* White text */
+  border: 1px solid #f4a261;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.active-btn:hover {
+  background-color: rgb(255, 109, 56); /* Slight hover effect */
+}
+
+.sign-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgb(255, 109, 56); /* Always peach */
+  color: white;                /* White text */
+  border: 1px solid #f4a261;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.sign-btn:hover {
+  background-color: rgb(255, 109, 56);  /* Slightly lighter peach on hover */
 }
